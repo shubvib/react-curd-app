@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 
 export default function Update() {
 
-
+  const navigate = useNavigate()
 
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -21,17 +21,22 @@ export default function Update() {
     setCheckbox(localStorage.getItem("Checkbox Value"));
   }, []);
 
-  const updateAPIData = () =>{
-    axios.put(`https://63bfef3ee262345656f3cbd9.mockapi.io/api/curd-app/fakeData/${id}`,{firstname,lastname,email,checkbox})
-    .then((res)=>{
-        console.log(res.data)
-        alert("Data Updated Successfully!!!")
-        
-    })
-    .catch((error)=>{
-        console.log(error)
-    })
-  }
+  const updateAPIData = () => {
+    axios
+      .put(
+        `https://63bfef3ee262345656f3cbd9.mockapi.io/api/curd-app/fakeData/${id}`,
+        { firstname, lastname, email, checkbox }
+      )
+      .then((res) => {
+        console.log(res.data);
+        alert("Data Updated Successfully!!!");
+        navigate("/read")
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Unable to Updated Successfully!!!");
+      });
+  };
 
   return (
     <div>
@@ -67,7 +72,9 @@ export default function Update() {
             onChange={(e) => setCheckbox(!checkbox)}
           />
         </Form.Field>
-        <Button type="submit" onClick={updateAPIData}>Update</Button>
+        <Button type="submit" onClick={updateAPIData}>
+          Update
+        </Button>
       </Form>
     </div>
   );

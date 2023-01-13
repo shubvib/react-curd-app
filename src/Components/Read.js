@@ -13,7 +13,7 @@ export default function Read() {
         setAPIData(res.data);
         console.log(res.data);
       });
-  }, []);
+  }, [APIdata]);
 
   const setData = (data) => {
     console.log(data);
@@ -26,15 +26,17 @@ export default function Read() {
   };
 
   const onDelete = (id) => {
-    try {
-        axios.delete(`https://63bfef3ee262345656f3cbd9.mockapi.io/api/curd-app/fakeData/${id}`)
-        alert("Data Deleted Successfully!!!")
-        
-    } catch (error) {
-        alert("Error!!! Unable to Delete Data")
-    }
-  }
-
+    axios
+      .delete(
+        `https://63bfef3ee262345656f3cbd9.mockapi.io/api/curd-app/fakeData/${id}`
+      )
+      .then((res) => {
+        alert("Data Deleted Successfully!!!");
+      })
+      .catch((error) => {
+        alert("Error!!! Unable to Delete Data");
+      });
+  };
 
   return (
     <div>

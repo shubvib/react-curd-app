@@ -2,20 +2,32 @@ import React from "react";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function Create(){
+export default function Create() {
+
+  const navigate = useNavigate()
+
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
   const [checkbox, setCheckbox] = useState(false);
 
   const postdata = () => {
-    try {
-        axios.post("https://63bfef3ee262345656f3cbd9.mockapi.io/api/curd-app/fakeData",{firstname,lastname,email,checkbox})
-        alert("Data Uploaded Successfully!!!")
-    } catch (error) {
-        alert("Unable to Uploaded Data!!!")        
-    }
+    axios
+      .post(
+        "https://63bfef3ee262345656f3cbd9.mockapi.io/api/curd-app/fakeData",
+        { firstname, lastname, email, checkbox }
+      )
+      .then((res) => {
+        console.log(res.data);
+        alert("Data Uploaded Successfully!!!");
+        navigate("/read")
+      })
+      .catch((error) => {
+        alert("Unable to Uploaded Data!!!");
+      });
+
     console.log(firstname);
     console.log(lastname);
     console.log(email);
@@ -57,4 +69,4 @@ export default function Create(){
       </Form>
     </div>
   );
-};
+}
