@@ -35,6 +35,7 @@ export default function Create() {
   };
   return (
     <div>
+      <h2 className="text-center">Insert New Data</h2>
       <Form className="create-form">
         <Form.Field>
           <label>First Name</label>

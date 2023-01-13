@@ -4,8 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Update() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -30,7 +29,7 @@ export default function Update() {
       .then((res) => {
         console.log(res.data);
         alert("Data Updated Successfully!!!");
-        navigate("/read")
+        navigate("/read");
       })
       .catch((error) => {
         console.log(error);
@@ -40,6 +39,7 @@ export default function Update() {
 
   return (
     <div>
+      <h2 className="text-center">Update Data</h2>
       <Form className="create-form">
         <Form.Field>
           <label>First Name</label>
